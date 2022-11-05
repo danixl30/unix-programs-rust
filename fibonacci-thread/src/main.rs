@@ -7,7 +7,7 @@ fn fibonacci(top: i16) -> i64 {
     let mut prev = 0;
     for _ in 1..=top {
         let temp_2 = result;
-        result = prev + result;
+        result += prev;
         prev = temp_2;
     }
     return result;
