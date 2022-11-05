@@ -7,7 +7,7 @@ fn fibonacci(top: i16) -> i64 {
     let mut prev = 0;
     for _ in 1..=top {
         let temp_2 = result;
-        result += prev + result;
+        result = prev + result;
         prev = temp_2;
     }
     return result;
@@ -29,10 +29,7 @@ fn roll() {
 fn main() {
     let mut handlers: Vec<JoinHandle<()>> = vec![];
     for _ in 1..=20 {
-        let handler = thread::spawn(|| {
-            roll();
-        });
-        handlers.push(handler);
+        handlers.push(thread::spawn(|| roll()));
     }
     handlers.into_iter().for_each(|handler| handler.join().unwrap());
 }
