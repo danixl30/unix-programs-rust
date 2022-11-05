@@ -28,13 +28,11 @@ fn roll() {
 
 fn main() {
     let mut handlers: Vec<JoinHandle<()>> = vec![];
-    for _ in 1..20 {
+    for _ in 1..=20 {
         let handler = thread::spawn(|| {
             roll();
         });
         handlers.push(handler);
     }
-    for handler in handlers {
-        handler.join().unwrap();
-    }
+    handlers.into_iter().for_each(|handler| handler.join().unwrap());
 }
