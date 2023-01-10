@@ -17,9 +17,10 @@ fn get_random(start: i16, end: i16) -> i16 {
 }
 
 fn main() {
+    let mut sum = 0;
     for _ in 1..=1000000 {
         let num = get_random(0, 19);
-        let result = fibonacci(num);
-        println!("{}", result);
+        sum += fibonacci(num);
     }
+    println!("Result: {}", sum);
 }

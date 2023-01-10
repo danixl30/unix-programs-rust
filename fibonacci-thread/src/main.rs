@@ -18,18 +18,20 @@ fn get_random(start: i16, end: i16) -> i16 {
     return rng.gen_range(start..end);
 }
 
-fn roll() {
+fn roll() -> i64 {
+    let mut sum = 0;
     for _ in 1..=50000 {
         let num = get_random(0, 19);
-        let result = fibonacci(num);
-        println!("{}", result);
+        sum += fibonacci(num);
     }
+    sum
 }
 
 fn main() {
-    let mut handlers: Vec<JoinHandle<()>> = vec![];
+    let mut handlers: Vec<JoinHandle<i64>> = vec![];
     for _ in 1..=20 {
         handlers.push(thread::spawn(|| roll()));
     }
-    handlers.into_iter().for_each(|handler| handler.join().unwrap());
+    let sum = handlers.into_iter().map(|handler| handler.join().unwrap()).reduce(|acc, value| acc + value);
+    println!("Result: {}", sum.unwrap());
 }
