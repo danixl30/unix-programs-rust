@@ -32,6 +32,8 @@ fn main() {
     for _ in 1..=20 {
         handlers.push(thread::spawn(|| roll()));
     }
-    let sum = handlers.into_iter().map(|handler| handler.join().unwrap()).reduce(|acc, value| acc + value);
+    let sum = handlers.into_iter()
+        .map(|handler| handler.join().unwrap())
+        .reduce(|acc, value| acc + value);
     println!("Result: {}", sum.unwrap());
 }
