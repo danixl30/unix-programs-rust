@@ -6,7 +6,7 @@ fn execute_command(command: String, args: Vec<String>) {
     child.wait().unwrap();
 }
 
-//Función que ejecuta el comando dado por parametro y determina el tiempo que tomó ejecutarlo
+//Función que ejecuta el comando dado por parámetro y determina el tiempo que tomó ejecutarlo
 fn time_prog(command: String, args: Vec<String>) -> u64 {
     let start = Instant::now(); //Se marca el tiempo justo antes de ejecutar el comando
     execute_command(command, args);
